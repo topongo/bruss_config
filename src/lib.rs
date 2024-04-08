@@ -84,5 +84,5 @@ impl TTConfig {
 }
 
 lazy_static! {
-    pub static ref CONFIGS: BrussConfig = BrussConfig::from_file("config.toml").expect("cannot load static configs");
+    pub static ref CONFIGS: BrussConfig = BrussConfig::from_file("bruss.toml").expect("cannot load static configs");
 }
