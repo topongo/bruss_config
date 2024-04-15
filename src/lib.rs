@@ -26,6 +26,7 @@ pub struct RoutingConfig {
     pub url: String,
     #[serde(default = "get_true")]
     pub exit_on_err: bool,
+    pub get_trips: bool,
 }
 
 fn get_true() -> bool { true }
