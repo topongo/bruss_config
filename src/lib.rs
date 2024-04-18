@@ -1,7 +1,10 @@
+use std::collections::HashSet;
+
 use lazy_static::lazy_static;
 use serde::{Serialize, Deserialize};
 use mongodb::options::{ClientOptions, Credential, ServerAddress};
 use tt::TTClient;
+use bruss_data::RoutingType;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct BrussConfig {
@@ -28,6 +31,8 @@ pub struct RoutingConfig {
     #[serde(default = "get_true")]
     pub exit_on_err: bool,
     pub get_trips: bool,
+    #[serde(default)]
+    pub skip_routing_types: HashSet<RoutingType>
 }
 
 fn get_true() -> bool { true }
