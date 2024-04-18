@@ -23,7 +23,8 @@ pub struct DBConfig {
 pub struct RoutingConfig {
     pub host: String,
     pub port: Option<u16>,
-    pub url: String,
+    pub url_bus: String,
+    pub url_rail: String,
     #[serde(default = "get_true")]
     pub exit_on_err: bool,
     pub get_trips: bool,
@@ -89,5 +90,5 @@ impl TTConfig {
 }
 
 lazy_static! {
-    pub static ref CONFIGS: BrussConfig = BrussConfig::from_file("bruss.toml").expect("cannot load static configs");
+    pub static ref CONFIGS: BrussConfig = BrussConfig::from_file("bruss.toml").expect("!!cannot load static configs");
 }
