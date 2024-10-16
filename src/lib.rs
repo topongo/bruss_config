@@ -10,7 +10,8 @@ use bruss_data::RoutingType;
 pub struct BrussConfig {
     pub db: DBConfig,
     pub tt: TTConfig,
-    pub routing: RoutingConfig
+    pub routing: RoutingConfig,
+    pub api: ApiConfig,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -33,6 +34,14 @@ pub struct RoutingConfig {
     pub get_trips: bool,
     #[serde(default)]
     pub skip_routing_types: HashSet<RoutingType>
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ApiConfig {
+    pub cors_allowed_origin: Option<String>,
+    pub cors_allowed_methods: Option<Vec<String>>,
+    pub cors_allowed_headers: Option<Vec<String>>,
+    pub cors_allow_credentials: Option<bool>,
 }
 
 fn get_true() -> bool { true }
@@ -69,7 +78,7 @@ impl BrussConfig {
 impl DBConfig {
     pub fn gen_mongodb_options(&self) -> ClientOptions {
         ClientOptions::builder()
-            .hosts(vec![ServerAddress::Tcp { host: self.host.to_string(), port: self.port.clone() }])
+            .hosts(vec![ServerAddress::Tcp { host: self.host.to_string(), port: self.port }])
             .credential(Credential::builder()
                 .username(self.user.to_string())
                 .password(self.password.to_string())
