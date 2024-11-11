@@ -6,6 +6,12 @@ use mongodb::options::{ClientOptions, Credential, ServerAddress};
 use tt::TTClient;
 use bruss_data::RoutingType;
 
+static DEFAULT_ROUTING_EXIT_ON_ERR: bool = true;
+static DEFAULT_API_DEFAULT_LIMIT: i64 = 20;
+
+fn get_default_routing_exit_on_err() -> bool { DEFAULT_ROUTING_EXIT_ON_ERR } 
+fn get_default_api_default_limit() -> i64 { DEFAULT_API_DEFAULT_LIMIT }
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct BrussConfig {
     pub db: DBConfig,
@@ -33,7 +39,9 @@ pub struct RoutingConfig {
     pub exit_on_err: bool,
     pub get_trips: bool,
     #[serde(default)]
-    pub skip_routing_types: HashSet<RoutingType>
+    pub skip_routing_types: HashSet<RoutingType>,
+    #[serde(default)]
+    pub deep_trip_check: bool,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -42,6 +50,8 @@ pub struct ApiConfig {
     pub cors_allowed_methods: Option<Vec<String>>,
     pub cors_allowed_headers: Option<Vec<String>>,
     pub cors_allow_credentials: Option<bool>,
+    #[serde(default = "get_default_api_default_limit")]
+    pub default_limit: i64,
 }
 
 fn get_true() -> bool { true }
