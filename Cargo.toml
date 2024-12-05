@@ -7,7 +7,7 @@ edition = "2021"
 toml = "0.8"
 lazy_static = "1.4"
 serde = "1.0"
-mongodb = "2.8"
+mongodb = { workspace = true }
 tt = { path = "../tt" }
 bruss_data = { path = "../data" }
 
