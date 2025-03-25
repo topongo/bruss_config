@@ -40,7 +40,7 @@ pub struct RoutingConfig {
     pub skip_routing_types: HashSet<RoutingType>,
     #[serde(default)]
     pub deep_trip_check: bool,
-    pub parallel_downloads: Option<u8>,
+    pub parallel_downloads: Option<usize>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
