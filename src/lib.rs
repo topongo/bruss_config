@@ -40,6 +40,7 @@ pub struct RoutingConfig {
     pub skip_routing_types: HashSet<RoutingType>,
     #[serde(default)]
     pub deep_trip_check: bool,
+    pub parallel_downloads: Option<u8>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -113,4 +114,11 @@ impl TTConfig {
 
 lazy_static! {
     pub static ref CONFIGS: BrussConfig = BrussConfig::from_file("bruss.toml").expect("!!cannot load static configs");
+}
+
+#[test]
+fn test_config() {
+    let config = BrussConfig::from_file("bruss.toml")
+        .unwrap();
+    println!("{:?}", config);
 }
