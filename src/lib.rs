@@ -3,7 +3,7 @@ use std::collections::HashSet;
 use lazy_static::lazy_static;
 use serde::{Serialize, Deserialize};
 use mongodb::options::{ClientOptions, Credential, ServerAddress};
-use tt::TTClient;
+use tt::{AreaType, TTClient};
 use bruss_data::RoutingType;
 
 static DEFAULT_API_DEFAULT_LIMIT: i64 = 20;
@@ -41,6 +41,12 @@ pub struct RoutingConfig {
     #[serde(default)]
     pub deep_trip_check: bool,
     pub parallel_downloads: Option<usize>,
+    #[serde(default)]
+    pub dry_run: bool,
+    pub filter_area: Option<HashSet<u16>>,
+    pub filter_area_type: Option<HashSet<AreaType>>,
+    pub filter_code: Option<HashSet<String>>,
+    pub max_trip_requests: Option<usize>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
