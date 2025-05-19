@@ -7,8 +7,10 @@ use tt::{AreaType, TTClient};
 use bruss_data::RoutingType;
 
 static DEFAULT_API_DEFAULT_LIMIT: i64 = 20;
+static DEFAULT_API_MAX_RT_AGE: u64 = 0;
 
 fn get_default_api_default_limit() -> i64 { DEFAULT_API_DEFAULT_LIMIT }
+fn get_default_api_max_rt_age() -> u64 { DEFAULT_API_MAX_RT_AGE }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct BrussConfig {
@@ -57,6 +59,8 @@ pub struct ApiConfig {
     pub cors_allow_credentials: Option<bool>,
     #[serde(default = "get_default_api_default_limit")]
     pub default_limit: i64,
+    #[serde(default = "get_default_api_max_rt_age")]
+    pub max_rt_age: u64,
 }
 
 fn get_true() -> bool { true }
